@@ -1,0 +1,27 @@
+﻿@model List<D3.Models.Ticket>
+
+<h2>Biglietti Venduti</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Sala</th>
+            <th>Tipo di Biglietto</th>
+            <th>Nome</th>
+            <th>Cognome</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in Model)
+        {
+            <tr>
+                <td>@ticket.Sala</td>
+                <td>@ticket.Tipo</td>
+                <td>@ticket.Nome</td>
+                <td>@ticket.Cognome</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Create")">Vendi un nuovo biglietto</a>
