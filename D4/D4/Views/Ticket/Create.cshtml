@@ -1,41 +1,42 @@
-﻿@model Ticket
+﻿@model Ticket  // Definisce il modello della vista come un oggetto Ticket 
 @{
-    ViewData["Title"] = "Aggiungi Biglietto";
+    ViewData["Title"] = "Aggiungi Biglietto";  <!-- Imposta il titolo della vista -->
 }
 
-<h2 class="mt-4">@ViewData["Title"]</h2>
+<h2 class="mt-4">@ViewData["Title"]</h2>  <!-- Mostra il titolo della vista -->
 
+<!-- Inizio del form per aggiungere un nuovo biglietto -->
 <form asp-action="Create" method="post" class="needs-validation" novalidate>
     <div class="form-group">
-        <label asp-for="Nome"></label>
-        <input asp-for="Nome" class="form-control" required />
+        <label asp-for="Nome"></label>  <!-- Etichetta per il campo Nome -->
+        <input asp-for="Nome" class="form-control" required />  <!-- Campo di input per il Nome con convalida -->
         <div class="invalid-feedback">
-            Inserisci il nome.
+            Inserisci il nome.  <!-- Messaggio di errore per la convalida del Nome -->
         </div>
     </div>
     <div class="form-group">
-        <label asp-for="Cognome"></label>
-        <input asp-for="Cognome" class="form-control" required />
+        <label asp-for="Cognome"></label>  <!-- Etichetta per il campo Cognome -->
+        <input asp-for="Cognome" class="form-control" required />  <!-- Campo di input per il Cognome con convalida -->
         <div class="invalid-feedback">
-            Inserisci il cognome.
+            Inserisci il cognome.  <!-- Messaggio di errore per la convalida del Cognome -->
         </div>
     </div>
     <div class="form-group">
-        <label asp-for="Sala"></label>
+        <label asp-for="Sala"></label>  <!-- Etichetta per il campo Sala -->
         <select asp-for="Sala" class="form-control">
-            <option value="SALA NORD">SALA NORD</option>
-            <option value="SALA EST">SALA EST</option>
-            <option value="SALA SUD">SALA SUD</option>
+            <option value="SALA NORD">SALA NORD</option>  <!-- Opzione per la sala NORD -->
+            <option value="SALA EST">SALA EST</option>  <!-- Opzione per la sala EST -->
+            <option value="SALA SUD">SALA SUD</option>  <!-- Opzione per la sala SUD -->
         </select>
     </div>
     <div class="form-group">
-        <label asp-for="Tipo"></label>
+        <label asp-for="Tipo"></label>  <!-- Etichetta per il campo Tipo -->
         <select asp-for="Tipo" class="form-control">
-            <option value="Intero">Intero</option>
-            <option value="Ridotto">Ridotto</option>
+            <option value="Intero">Intero</option>  <!-- Opzione per il biglietto Intero -->
+            <option value="Ridotto">Ridotto</option>  <!-- Opzione per il biglietto Ridotto -->
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">Aggiungi</button>
+    <button type="submit" class="btn btn-primary">Aggiungi</button>  <!-- Pulsante per inviare il form -->
 </form>
 
 @section Scripts {
@@ -43,14 +44,14 @@
         (function () {
             'use strict';
             window.addEventListener('load', function () {
-                var forms = document.getElementsByClassName('needs-validation');
+                var forms = document.getElementsByClassName('needs-validation');  // Seleziona tutti i form con la classe 'needs-validation' -->
                 var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
+                    form.addEventListener('submit', function (event) {  // Aggiunge un listener per l'evento submit -->
+                        if (form.checkValidity() === false) {  // Controlla se il form è valido -->
+                            event.preventDefault();  // Previene l'invio del form se non è valido -->
                             event.stopPropagation();
                         }
-                        form.classList.add('was-validated');
+                        form.classList.add('was-validated');  // Aggiunge la classe 'was-validated' al form -->
                     }, false);
                 });
             }, false);
