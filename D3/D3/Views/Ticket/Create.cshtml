@@ -1,30 +1,24 @@
 ﻿@model D3.Models.Ticket
 
-<h2>Acquisto Nuovo Biglietto</h2>
-
-<form asp-controller="Ticket" asp-action="Create" method="post">
+<form asp-action="Create" method="post">
     <div class="form-group">
-        <label for="Nome">Nome</label>
-        <input type="text" class="form-control" id="Nome" name="Nome" required>
+        <label asp-for="Nome">Nome</label>
+        <input asp-for="Nome" class="form-control" />
     </div>
     <div class="form-group">
-        <label for="Cognome">Cognome</label>
-        <input type="text" class="form-control" id="Cognome" name="Cognome" required>
+        <label asp-for="Cognome">Cognome</label>
+        <input asp-for="Cognome" class="form-control" />
     </div>
     <div class="form-group">
-        <label for="Sala">Sala</label>
-        <select class="form-control" id="Sala" name="Sala">
-            <option value="SALA NORD">SALA NORD</option>
-            <option value="SALA EST">SALA EST</option>
-            <option value="SALA SUD">SALA SUD</option>
+        <label asp-for="Sala">Sala</label>
+        <input asp-for="Sala" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Tipo">Tipo di Biglietto</label>
+        <select asp-for="Tipo" class="form-control">
+            <option value="0">Intero</option>
+            <option value="1">Ridotto</option>
         </select>
     </div>
-    <div class="form-group">
-        <label for="Tipo">Tipo di Biglietto</label>
-        <select class="form-control" id="Tipo" name="Tipo">
-            <option value="Intero">Intero</option>
-            <option value="Ridotto">Ridotto</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-success">Vendi Biglietto</button>
+    <button type="submit" class="btn btn-primary">Crea Biglietto</button>
 </form>

@@ -1,4 +1,4 @@
-﻿using D3.Models; // Importa il namespace del modello
+﻿using D3.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +9,9 @@ namespace D3.Controllers
     {
         private static List<Ticket> tickets = new List<Ticket>
         {
-            new Ticket { Sala = "SALA NORD", Tipo = TipoBiglietto.Intero },
-            new Ticket { Sala = "SALA NORD", Tipo = TipoBiglietto.Ridotto },
-            new Ticket { Sala = "SALA EST", Tipo = TipoBiglietto.Intero },
-            new Ticket { Sala = "SALA SUD", Tipo = TipoBiglietto.Ridotto },
-            new Ticket { Sala = "SALA SUD", Tipo = TipoBiglietto.Ridotto }
+            // Esempio di biglietti pre-esistenti
+            new Ticket { Sala = "SALA NORD", Tipo = Models.TipoBiglietto.Intero, Nome = "Mario", Cognome = "Rossi" },
+            // Aggiungi altri biglietti di esempio se necessario
         };
 
         private static int maxCapacity = 120;
@@ -37,6 +35,12 @@ namespace D3.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View(new Ticket()); // Passa un'istanza vuota del modello Ticket alla vista
+        }
+
         public IActionResult Statistics()
         {
             var stats = tickets.GroupBy(t => t.Sala)
@@ -44,7 +48,7 @@ namespace D3.Controllers
                                {
                                    Sala = group.Key,
                                    Totale = group.Count(),
-                                   Ridotti = group.Count(t => t.Tipo == TipoBiglietto.Ridotto)
+                                   Ridotti = group.Count(t => t.Tipo == Models.TipoBiglietto.Ridotto)
                                }).ToList();
 
             return View(stats);

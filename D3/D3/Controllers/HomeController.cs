@@ -21,7 +21,7 @@ namespace D3.Controllers
         public IActionResult Index()
         {
 
-            return View();
+            return View(Biglietti);
         }
 
         // Altri metodi del controller...

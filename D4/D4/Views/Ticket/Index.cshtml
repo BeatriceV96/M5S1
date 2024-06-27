@@ -1,0 +1,67 @@
+﻿@model List<Ticket>
+@{
+    ViewData["Title"] = "Elenco Biglietti Venduti";
+}
+
+<h2 class="mt-4">@ViewData["Title"]</h2>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Sala</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in Model)
+        {
+            <tr>
+                <td>@ticket.Nome</td>
+                <td>@ticket.Cognome</td>
+                <td>@ticket.Sala</td>
+                <td>@ticket.Tipo</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a href="/Ticket/Create" class="btn btn-primary">Aggiungi Biglietto</a>
+</p>
+
+<h3 class="mt-4">Statistiche</h3>
+<div id="statistics">
+    <ul class="list-group">
+        <li class="list-group-item">
+            SALA NORD: <span id="nord-totale">@Cinema.SaleBigliettiVenduti["SALA NORD"]</span> (Ridotti: <span id="nord-ridotti">@Cinema.SaleBigliettiRidotti["SALA NORD"]</span>)
+        </li>
+        <li class="list-group-item">
+            SALA EST: <span id="est-totale">@Cinema.SaleBigliettiVenduti["SALA EST"]</span> (Ridotti: <span id="est-ridotti">@Cinema.SaleBigliettiRidotti["SALA EST"]</span>)
+        </li>
+        <li class="list-group-item">
+            SALA SUD: <span id="sud-totale">@Cinema.SaleBigliettiVenduti["SALA SUD"]</span> (Ridotti: <span id="sud-ridotti">@Cinema.SaleBigliettiRidotti["SALA SUD"]</span>)
+        </li>
+    </ul>
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function updateStatistics() {
+                $.get('/Ticket/GetStatistics', function (data) {
+                    $('#nord-totale').text(data.nord.totale);
+                    $('#nord-ridotti').text(data.nord.ridotti);
+                    $('#est-totale').text(data.est.totale);
+                    $('#est-ridotti').text(data.est.ridotti);
+                    $('#sud-totale').text(data.sud.totale);
+                    $('#sud-ridotti').text(data.sud.ridotti);
+                });
+            }
+
+            setInterval(updateStatistics, 5000); // Aggiorna ogni 5 secondi
+        });
+    </script>
+}

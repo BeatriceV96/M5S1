@@ -1,8 +1,12 @@
-﻿@model List<D3.Models.Ticket>
+﻿@model IEnumerable<D3.Controllers.Biglietto>
 
-<h2>Biglietti Venduti</h2>
+@{
+    ViewData["Title"] = "Elenco Biglietti Venduti";
+}
 
-<table>
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
     <thead>
         <tr>
             <th>Sala</th>
@@ -16,12 +20,12 @@
         {
             <tr>
                 <td>@ticket.Sala</td>
-                <td>@ticket.Tipo</td>
-                <td>@ticket.Nome</td>
-                <td>@ticket.Cognome</td>
+                <td>@ticket.Tipo.ToString()</td>
+                <td>@ticket.Ospite.Nome</td>
+                <td>@ticket.Ospite.Cognome</td>
             </tr>
         }
     </tbody>
 </table>
 
-<a href="@Url.Action("Create")">Vendi un nuovo biglietto</a>
+<a class="btn btn-primary" href="@Url.Action("Create")">Vendi un nuovo biglietto</a>

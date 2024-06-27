@@ -1,6 +1,5 @@
 ﻿namespace D3.Models
 {
-
     public class Ticket
     {
         public string Sala { get; set; }
