@@ -1,7 +1,12 @@
+using DailyProject.Services;
+using DailyProject.Services.Interface;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IArticoloService, ArticoloService>();
 
 var app = builder.Build();
 

@@ -9,13 +9,14 @@ namespace DailyProject.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private static IArticoloService _articoloService = new ArticoloService();
-        private static IVenditeService _venditeService = new VenditeService();
+        private readonly IArticoloService _articoloService;
+        private readonly IWebHostEnvironment _env;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IArticoloService articoloService, IWebHostEnvironment env)
         {
             _logger = logger;
-            _articoloService = new ArticoloService();
+            _articoloService = articoloService;
+            _env = env;
         }
 
         public IActionResult Index()
@@ -35,14 +36,12 @@ namespace DailyProject.Controllers
 
         public IActionResult CreaProdotto()
         {
-            return View();
+            return View(new ArticoloViewModel());
         }
 
         [HttpPost]
         public async Task<IActionResult> CreaProdotto(Articolo modello, IFormFile fileImmagineCopertina)
         {
-            if (ModelState.IsValid)
-            {
                 if (fileImmagineCopertina != null && fileImmagineCopertina.Length > 0)
                 {
                     var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileImmagineCopertina.FileName);
@@ -60,9 +59,7 @@ namespace DailyProject.Controllers
 
                 _articoloService.AddArticolo(modello);
                 return RedirectToAction("Index");
-            }
-
-            return View(modello);
+            
         }
 
     }
