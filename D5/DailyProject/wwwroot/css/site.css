@@ -20,3 +20,39 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.vetrina img {
+    width: 100%;
+    height: auto;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card {
+    cursor: pointer;
+}
+.card-img-top {
+    height: 400px;
+    object-fit: cover;
+}
+.vetrina img {
+    width: 100%;
+    height: auto;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card {
+    cursor: pointer;
+}

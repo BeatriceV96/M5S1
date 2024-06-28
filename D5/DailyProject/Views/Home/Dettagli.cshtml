@@ -1,0 +1,29 @@
+﻿@model DailyProject.Classi.Articolo
+
+@{
+    ViewData["Title"] = Model.Nome;
+}
+
+<div class="container mt-4 d-flex justify-content-center">
+    <div class="card shadow-sm" style="max-width: 600px;">
+        <img src="@Model.ImmagineCopertina" alt="@Model.Nome" class="card-img-top img-fluid">
+        <div class="card-body">
+            <h2 class="card-title">@Model.Nome</h2>
+            <p class="card-text">Prezzo: @Model.Prezzo €</p>
+            <p class="card-text">@Model.Descrizione</p>
+            <a asp-action="Index" asp-controller="Home" class="btn btn-secondary mt-3">Torna alla Vetrina</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card-img-top {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+    }
+
+    .card {
+        max-width: 600px;
+    }
+</style>

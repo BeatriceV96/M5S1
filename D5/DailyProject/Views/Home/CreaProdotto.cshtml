@@ -1,0 +1,42 @@
+﻿@model DailyProject.Classi.Articolo
+  
+@{
+    ViewData["Title"] = "Crea Prodotto";
+}
+
+<div class="container mt-4">
+    <h2>Crea Nuovo Prodotto</h2>
+
+    <form asp-action="CreaProdotto" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Nome" class="control-label">Nome</label>
+            <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Prezzo" class="control-label">Prezzo</label>
+            <input asp-for="Prezzo" class="form-control" />
+            <span asp-validation-for="Prezzo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Descrizione" class="control-label">Descrizione</label>
+            <textarea asp-for="Descrizione" class="form-control"></textarea>
+            <span asp-validation-for="Descrizione" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImmagineCopertina" class="control-label">Immagine di Copertina</label>
+            <input asp-for="ImmagineCopertina" type="file" class="form-control-file" name="fileImmagineCopertina" />
+            <span asp-validation-for="ImmagineCopertina" class="text-danger"></span>
+        </div>
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary">Crea</button>
+        </div>
+    </form>
+</div>
+
+
+<style>
+    .form-group {
+        margin-bottom: 15px;
+    }
+</style>
