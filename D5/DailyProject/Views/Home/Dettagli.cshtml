@@ -21,8 +21,11 @@
     <p>Prezzo: @Model.Prezzo €</p>
     <p>@Model.Descrizione</p>
     <img src="@Model.ImmagineCopertina" alt="@Model.Nome" class="img-fluid mb-2" />
-    <a href="@Url.Action("Index", "Home")" class="btn btn-secondary mt-3">Torna alla Vetrina</a>
     <a href="@Url.Action("ModificaProdotto", "Home", new { id = Model.Id })" class="btn btn-primary mt-3">Modifica Prodotto</a>
+    <form asp-action="EliminaProdotto" method="post" style="display:inline;">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <button type="submit" class="btn btn-danger mt-3">Elimina</button>
+    </form>
 </div>
 
 <style>

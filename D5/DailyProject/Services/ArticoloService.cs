@@ -51,5 +51,14 @@ namespace DailyProject.Services
                 existing.Tipo = articolo.Tipo;
             }
         }
+
+        public void DeleteArticolo(int id)
+        {
+            var articoloDaEliminare = articoli.FirstOrDefault(a => a.Id == id);
+            if (articoloDaEliminare != null)
+            {
+                articoli.Remove(articoloDaEliminare);
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace DailyProject.Services.Interface
         List<Articolo> GetArticoli();
         void AddArticolo(Articolo articolo);
         void UpdateArticolo(Articolo articolo);
+        void DeleteArticolo(int id);
 
     }
 }

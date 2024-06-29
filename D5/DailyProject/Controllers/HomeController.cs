@@ -124,6 +124,19 @@ namespace DailyProject.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public IActionResult EliminaProdotto(int id)
+        {
+            var articoloDaEliminare = _articoloService.GetArticoli().FirstOrDefault(a => a.Id == id);
+            if (articoloDaEliminare == null)
+            {
+                return NotFound();
+            }
+
+            _articoloService.DeleteArticolo(id);
+            return RedirectToAction("Index");
+        }
     }
 }
+
 
