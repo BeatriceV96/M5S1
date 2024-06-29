@@ -19,6 +19,6 @@ namespace DailyProject.Models
         [Display(Name = "Immagine Aggiuntiva 2")]
         public IFormFile? ImmagineAggiuntiva2 { get; set; }
         [Display(Name = "Tipo"), Required]
-        public string Tipo { get; set; }
+        public string Tipo { get; set; } = string.Empty;
     }
 }

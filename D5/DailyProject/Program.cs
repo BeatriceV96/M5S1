@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IArticoloService, ArticoloService>();
+builder.Services.AddTransient<IArticoloService, ArticoloService>(); // crea nuove istanze del servizio ogni volta che gli viene richiesto
 
 var app = builder.Build();
 

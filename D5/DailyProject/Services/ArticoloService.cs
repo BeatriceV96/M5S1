@@ -38,5 +38,18 @@ namespace DailyProject.Services
             articolo.Id = articoli.Any() ? articoli.Max(a => a.Id) + 1 : 1;
             articoli.Add(articolo);
         }
+
+
+        public void UpdateArticolo(Articolo articolo)
+        {
+            var existing = articoli.FirstOrDefault(a => a.Id == articolo.Id);
+            if (existing != null)
+            {
+                existing.Descrizione = articolo.Descrizione;
+                existing.Nome = articolo.Nome;
+                existing.Prezzo = articolo.Prezzo;
+                existing.Tipo = articolo.Tipo;
+            }
+        }
     }
 }

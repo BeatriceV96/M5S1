@@ -7,7 +7,7 @@
 <div class="container mt-4">
     <h2>Crea Nuovo Prodotto</h2>
 
-    <form asp-action="CreaProdotto" method="post" enctype="multipart/form-data">
+    <form asp-controller="Home" asp-action="CreaProdotto" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label asp-for="Nome" class="control-label"></label>
             <input asp-for="Nome" class="form-control" />
