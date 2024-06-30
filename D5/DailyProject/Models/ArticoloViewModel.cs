@@ -13,7 +13,7 @@ namespace DailyProject.Models
         [Display(Name = "Descrizione"), Required]
         public string Descrizione { get; set; }
         [Display(Name = "Immagine Copertina"), Required]
-        public IFormFile? ImmagineCopertina { get; set; } // Modificato da string a IFormFile
+        public IFormFile? ImmagineCopertina { get; set; } // Modificato da string a IFormFile e lo inizializzo a nullable
         [Display(Name = "Immagine Aggiuntiva 1")]
         public IFormFile? ImmagineAggiuntiva1 { get; set; }
         [Display(Name = "Immagine Aggiuntiva 2")]
