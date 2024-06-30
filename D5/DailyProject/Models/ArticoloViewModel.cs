@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http; // Aggiungi questo using per IFormFile
+﻿using Microsoft.AspNetCore.Http; 
 using System.ComponentModel.DataAnnotations;
 
 namespace DailyProject.Models
