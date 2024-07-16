@@ -2,7 +2,7 @@
 
 namespace DeliveryService.DataLayer.Services
 {
-    public interface IAuthenticationService
+    public interface IAuthService
     {
         ApplicationUser Login(string username, string password);
     }

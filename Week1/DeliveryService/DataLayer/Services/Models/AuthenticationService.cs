@@ -2,7 +2,7 @@
 
 namespace DeliveryService.DataLayer.Services.Models
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthenticationService : IAuthService
     {
         public ApplicationUser Login(string username, string password)
         {
