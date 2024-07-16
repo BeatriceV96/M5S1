@@ -11,7 +11,7 @@ builder.Services.
     AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(opt =>
     {
-        opt.LoginPath = "Account/Login"; //pagina alla quale l'utente sara' indirizzato se non e' gia' stato riconosciuto
+        opt.LoginPath = "/Account/Login"; //pagina alla quale l'utente sara' indirizzato se non e' gia' stato riconosciuto
     });//fine configurazione dell'autenticazione
 
 

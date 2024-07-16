@@ -1,8 +1,29 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Benvenuti alla nostra azienda di spedizioni</h1>
+<p>Questo è il sito ufficiale della nostra azienda di spedizioni. Offriamo servizi di spedizione in tutto il territorio nazionale.</p>
+<p><a href="/Home/Presentazione">Scopri di più su di noi</a></p>
+
+<h2>Login Cliente</h2>
+<form method="post" asp-controller="Account" asp-action="Login">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required />
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required />
+    </div>
+    <div class="form-group">
+        <input type="checkbox" id="rememberMe" name="rememberMe" />
+        <label for="rememberMe">Ricordami</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+@if (ViewBag.LoginError != null)
+{
+    <div class="alert alert-danger">@ViewBag.LoginError</div>
+}
