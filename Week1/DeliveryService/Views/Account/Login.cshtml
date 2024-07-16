@@ -1,7 +1,7 @@
 ﻿@using DeliveryService.DataLayer.Services.Models
 @model ApplicationUser
 
-<h2>Login Cliente</h2>
+<h2>Login Admin</h2>
 <form method="post" asp-action="Login">
     <div class="form-group">
         <label for="userName">Nome Utente</label>
@@ -12,11 +12,5 @@
         <input type="password" class="form-control" id="password" asp-for="Password" required />
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
-    <p>Non hai un account? <a href="@Url.Action("Register", "Account")">Registrati</a></p>
 </form>
 
-
-@if (ViewBag.LoginError != null)
-{
-    <div class="alert alert-danger">@ViewBag.LoginError</div>
-}

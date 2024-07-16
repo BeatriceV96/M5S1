@@ -1,7 +1,7 @@
+using DeliveryService.DataLayer.Interfaces;
 using DeliveryService.DataLayer.Services;
 using DeliveryService.DataLayer.Services.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,13 +10,20 @@ builder.Services.AddControllersWithViews();
 
 // Configurazione dell'autenticazione
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(opt =>
+    .AddCookie(options =>
     {
-        opt.LoginPath = "/Account/Login"; // Pagina alla quale l'utente sarà indirizzato se non è già stato riconosciuto
-    }); // Fine configurazione dell'autenticazione
+        options.LoginPath = "/Account/Login";
+    });
+
+
+// Fine configurazione dell'autenticazione
 
 // Configurazione del servizio di gestione delle autenticazioni
-builder.Services.AddScoped<IAuthService, AuthenticationService>(); // Assicurati che l'interfaccia e il servizio siano corretti
+builder.Services.AddScoped<IAuthService, AuthService>(); // Assicurati che l'interfaccia e il servizio siano corretti
+
+// Aggiungi qui la registrazione di SpedizioneService
+builder.Services.AddScoped<SpedizioneService>();
+// Sostituisci ISpedizioneService con l'interfaccia corretta se esiste
 
 var app = builder.Build();
 

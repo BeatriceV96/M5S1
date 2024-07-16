@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home";
+
+    var currentUser = (User.Identity?.IsAuthenticated ?? false) ? User.Identity.Name : "";
 }
 
 <header class="jumbotron">
@@ -9,7 +11,7 @@
 </header>
 
 <section>
-    <h2>Contattaci</h2>
+    <h2>Contattaci @currentUser</h2>
     <p>Per qualsiasi informazione, compila il form sottostante e ti risponderemo al più presto.</p>
     <form method="post" asp-controller="Home" asp-action="Contatti">
         <div class="form-group">
@@ -25,6 +27,7 @@
             <textarea class="form-control" id="messaggio" name="messaggio" rows="3" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Invia</button>
+
     </form>
 </section>
 

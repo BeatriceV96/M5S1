@@ -1,4 +1,5 @@
 using DeliveryService.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -12,6 +13,8 @@ namespace DeliveryService.Controllers
         {
             _logger = logger;
         }
+
+       // [Authorize] //diamo autorizzazione solo a deternminate tipologie di utenti
 
         public IActionResult Index()
         {
