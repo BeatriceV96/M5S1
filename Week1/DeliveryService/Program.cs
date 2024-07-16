@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,11 @@ builder.Services.
     {
         opt.LoginPath = "Account/Login"; //pagina alla quale l'utente sara' indirizzato se non e' gia' stato riconosciuto
     });//fine configurazione dell'autenticazione
+
+
+ //configuraziobne del servizio di gestione delle autenticazioni
+    builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();// e' necessario autenticare un utente ad ogni richiesta
+
 
 var app = builder.Build();
 
