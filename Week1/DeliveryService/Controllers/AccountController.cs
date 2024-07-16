@@ -1,43 +1,35 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DeliveryService.DataLayer.Services;
+using DeliveryService.DataLayer.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeliveryService.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IAuthenticationService authenticationService;
 
-        public AccountController(SignInManager<IdentityUser> signInManager)
+        public AccountController(IAuthenticationService authenticationService)
         {
-            _signInManager = signInManager;
+            this.authenticationService = authenticationService;
         }
 
-        [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string email, string password, bool rememberMe)
+        public IActionResult Login(ApplicationUser user)
         {
-            var result = await _signInManager.PasswordSignInAsync(email, password, rememberMe, false);
-
-            if (result.Succeeded)
+            try
             {
-                return RedirectToAction("Index", "Home");
+                var u = authenticationService.Login(user.UserName, user.Password);
             }
-
-            ViewBag.LoginError = "Login non valido";
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
+            catch (Exception ex)
+            {
+                // Gestire l'eccezione o registrare l'errore
+            }
             return RedirectToAction("Index", "Home");
         }
     }
 }
-
