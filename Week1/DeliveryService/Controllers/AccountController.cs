@@ -3,6 +3,7 @@ using DeliveryService.DataLayer.Services.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 using System.Security.Claims;
 
 namespace DeliveryService.Controllers
@@ -45,6 +46,31 @@ namespace DeliveryService.Controllers
                 // Gestire l'eccezione o registrare l'errore
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Register()
+            {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(RegisterModel user)
+        {
+
+            if (ModelState.IsValid)
+            {
+                if (user.Password != user.ConfirmPassword)
+                {
+                    ViewBag.RegistrationError = "Le password non coincidono.";
+                    return View(user);
+                }
+
+                // Logica per registrare l'utente
+                // Puoi aggiungere la logica per salvare il nuovo utente nel database
+
+                return RedirectToAction("Login", "Account");
+            }
+            return View(user);
         }
     }
 }

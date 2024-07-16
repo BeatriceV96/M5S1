@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks.Dataflow;
-
+﻿
 namespace DeliveryService.DataLayer.Services.Models
 {
     public class AuthenticationService : IAuthService
@@ -9,6 +8,11 @@ namespace DeliveryService.DataLayer.Services.Models
             if (username == password)
                 return new ApplicationUser { UserName = username, Password = password };
             throw new Exception("Utente non autenticato");
+        }
+
+        public void Register(string username, string password)
+        {
+
         }
     }
 }

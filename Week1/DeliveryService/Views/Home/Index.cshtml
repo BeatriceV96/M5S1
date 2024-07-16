@@ -2,28 +2,38 @@
     ViewData["Title"] = "Home";
 }
 
-<h1>Benvenuti alla nostra azienda di spedizioni</h1>
-<p>Questo è il sito ufficiale della nostra azienda di spedizioni. Offriamo servizi di spedizione in tutto il territorio nazionale.</p>
-<p><a href="/Home/Presentazione">Scopri di più su di noi</a></p>
+<header class="jumbotron">
+    <h1 class="display-4">Benvenuti alla nostra azienda di spedizioni</h1>
+    <p class="lead">Questo è il sito ufficiale della nostra azienda di spedizioni. Offriamo servizi di spedizione in tutto il territorio nazionale.</p>
+    <hr class="my-4">
+</header>
 
-<h2>Login Cliente</h2>
-<form method="post" asp-controller="Account" asp-action="Login">
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" required />
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required />
-    </div>
-    <div class="form-group">
-        <input type="checkbox" id="rememberMe" name="rememberMe" />
-        <label for="rememberMe">Ricordami</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+<section>
+    <h2>Contattaci</h2>
+    <p>Per qualsiasi informazione, compila il form sottostante e ti risponderemo al più presto.</p>
+    <form method="post" asp-controller="Home" asp-action="Contatti">
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" required />
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+            <label for="messaggio">Messaggio</label>
+            <textarea class="form-control" id="messaggio" name="messaggio" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Invia</button>
+    </form>
+</section>
 
-@if (ViewBag.LoginError != null)
+@if (ViewBag.ContattiSuccesso != null)
 {
-    <div class="alert alert-danger">@ViewBag.LoginError</div>
+    <div class="alert alert-success">@ViewBag.ContattiSuccesso</div>
+}
+
+@if (ViewBag.ContattiErrore != null)
+{
+    <div class="alert alert-danger">@ViewBag.ContattiErrore</div>
 }

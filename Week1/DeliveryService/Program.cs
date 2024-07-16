@@ -1,23 +1,22 @@
+using DeliveryService.DataLayer.Services;
+using DeliveryService.DataLayer.Services.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//configurazione dell'authenticazione
-builder.Services.
-    AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+// Configurazione dell'autenticazione
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(opt =>
     {
-        opt.LoginPath = "/Account/Login"; //pagina alla quale l'utente sara' indirizzato se non e' gia' stato riconosciuto
-    });//fine configurazione dell'autenticazione
+        opt.LoginPath = "/Account/Login"; // Pagina alla quale l'utente sarà indirizzato se non è già stato riconosciuto
+    }); // Fine configurazione dell'autenticazione
 
-
- //configuraziobne del servizio di gestione delle autenticazioni
-    builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();// e' necessario autenticare un utente ad ogni richiesta
-
+// Configurazione del servizio di gestione delle autenticazioni
+builder.Services.AddScoped<IAuthService, AuthenticationService>(); // Assicurati che l'interfaccia e il servizio siano corretti
 
 var app = builder.Build();
 
@@ -34,6 +33,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

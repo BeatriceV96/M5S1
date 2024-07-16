@@ -12,10 +12,11 @@
         <input type="password" class="form-control" id="password" asp-for="Password" required />
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
+    <p>Non hai un account? <a href="@Url.Action("Register", "Account")">Registrati</a></p>
 </form>
+
 
 @if (ViewBag.LoginError != null)
 {
     <div class="alert alert-danger">@ViewBag.LoginError</div>
 }
-
