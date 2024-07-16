@@ -1,7 +1,17 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//configurazione dell'authenticazione
+builder.Services.
+    AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(opt =>
+    {
+        opt.LoginPath = "Account/Login"; //pagina alla quale l'utente sara' indirizzato se non e' gia' stato riconosciuto
+    });//fine configurazione dell'autenticazione
 
 var app = builder.Build();
 
