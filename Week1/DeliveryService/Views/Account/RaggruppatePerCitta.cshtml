@@ -1,0 +1,21 @@
+﻿@model Dictionary<string, int>
+
+<h2>Spedizioni Raggruppate per Città</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Città</th>
+            <th>Numero di Spedizioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var spedizione in Model)
+        {
+            <tr>
+                <td>@spedizione.Key</td>
+                <td>@spedizione.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,21 +1,10 @@
-using DeliveryService.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace DeliveryService.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-       // [Authorize] //diamo autorizzazione solo a deternminate tipologie di utenti
-
         public IActionResult Index()
         {
             return View();
@@ -26,10 +15,23 @@ namespace DeliveryService.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [Authorize]
+        public IActionResult Contatti()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult InviaContatto(string nome, string email, string messaggio)
+        {
+            ViewBag.Message = "Messaggio inviato con successo!";
+            return View("Contatti");
+        }
+
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
     }
 }

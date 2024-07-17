@@ -1,0 +1,25 @@
+﻿@model IEnumerable<DeliveryService.DataLayer.Entities.AggiornamentoSpedizione>
+
+<h2>Risultato Stato Spedizione</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Data e Ora</th>
+            <th>Stato</th>
+            <th>Luogo</th>
+            <th>Descrizione</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aggiornamento in Model)
+        {
+            <tr>
+                <td>@aggiornamento.DataOraAggiornamento</td>
+                <td>@aggiornamento.Stato</td>
+                <td>@aggiornamento.Luogo</td>
+                <td>@aggiornamento.Descrizione</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<DeliveryService.DataLayer.Entities.Spedizione>
+
+<h2>Spedizioni in Consegna Oggi</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Numero Identificativo</th>
+            <th>Cliente</th>
+            <th>Destinatario</th>
+            <th>Città</th>
+            <th>Indirizzo</th>
+            <th>Data Consegna Prevista</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var spedizione in Model)
+        {
+            <tr>
+                <td>@spedizione.NumeroIdentificativo</td>
+                <td>@spedizione.Cliente.Nome</td>
+                <td>@spedizione.NominativoDestinatario</td>
+                <td>@spedizione.CittaDestinataria</td>
+                <td>@spedizione.IndirizzoDestinatario</td>
+                <td>@spedizione.DataConsegnaPrevista.ToString("g")</td>
+            </tr>
+        }
+    </tbody>
+</table>
