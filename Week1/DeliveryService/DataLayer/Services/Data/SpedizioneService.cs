@@ -3,7 +3,7 @@ using DeliveryService.DataLayer.Entities;
 using DeliveryService.DataLayer.Interfaces;
 using System.Collections.Generic;
 
-public class SpedizioneService
+public class SpedizioneService 
 {
     private readonly DbContext _dbContext;
 
@@ -55,5 +55,50 @@ public class SpedizioneService
     public Dictionary<string, int> GetSpedizioniRaggruppatePerCitta()
     {
         return _dbContext.Spedizioni.GetRaggruppatePerCitta();
+    }
+
+    public void Create(Spedizione spedizione)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Delete(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Spedizione Read(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Update(Spedizione spedizione)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Spedizione> ReadAll()
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<AggiornamentoSpedizione> GetAggiornamenti(string codiceFiscalePartitaIVA, string numeroSpedizione)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Spedizione> GetInConsegnaOggi()
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Spedizione> GetInAttesaDiConsegna()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Dictionary<string, int> GetRaggruppatePerCitta()
+    {
+        throw new NotImplementedException();
     }
 }

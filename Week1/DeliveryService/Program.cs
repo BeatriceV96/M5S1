@@ -5,15 +5,21 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using DeliveryService.DataLayer.Services.Models;
 
 
-
 var builder = WebApplication.CreateBuilder(args);
 
-// Configura i servizi per l'applicazione
-builder.Services.AddControllersWithViews();
+// Configura i servizi DAO come scoped
+builder.Services.AddScoped<ClienteService>();
+builder.Services.AddScoped< SpedizioneService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
-// Configurazione del DbContext
-//builder.Services.AddDbContext<DbContext>(options =>
-   // options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Configura il DbContext come scoped
+builder.Services.AddScoped<DbContext>();
+
+// Configura i servizi
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+// Configura i servizi personalizzati e i controller
+builder.Services.AddControllersWithViews();
 
 // Configurazione dell'autenticazione
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -21,11 +27,6 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         opt.LoginPath = "/Account/Login"; // Pagina di login
     });
-
-// Configurazione dei servizi di autenticazione e spedizione
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<DbContext>();
-
 
 var app = builder.Build();
 
@@ -48,5 +49,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();

@@ -1,4 +1,4 @@
-﻿using DeliveryService.DataLayer.Interfaces;
+﻿using  DeliveryService.DataLayer.Interfaces;
 using DeliveryService.DataLayer.Services;
 using DeliveryService.DataLayer.Services.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -13,9 +13,9 @@ namespace DeliveryService.Controllers
     public class AccountController : Controller
     {
         private readonly IAuthService _authenticationService;
-        private readonly IClienteDao _clienteDao;
+        private readonly ClienteService _clienteDao;
 
-        public AccountController(IAuthService authenticationService, IClienteDao clienteDao)
+        public AccountController(IAuthService authenticationService, ClienteService clienteDao)
         {
             _authenticationService = authenticationService;
             _clienteDao = clienteDao;
@@ -32,6 +32,12 @@ namespace DeliveryService.Controllers
             try
             {
                 var u = _authenticationService.Login(user.UserName, user.Password);
+
+                if (u == null)
+                {
+                    ViewBag.LoginError = "Nome utente o password non validi.";
+                    return View();
+                }
 
                 // Creiamo le claims
                 var claims = new List<Claim>

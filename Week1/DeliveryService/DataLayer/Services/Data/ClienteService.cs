@@ -1,38 +1,48 @@
-﻿using DeliveryService.DataLayer;
-using DeliveryService.DataLayer.Entities;
+﻿using DeliveryService.DataLayer.Entities;
 using DeliveryService.DataLayer.Interfaces;
+using System.Collections.Generic;
 
-public class ClienteService
+namespace DeliveryService.DataLayer.Services
 {
-    private readonly DbContext _dbContext;
-
-    public ClienteService(DbContext dbContext)
+    public class ClienteService 
     {
-        _dbContext = dbContext;
-    }
+        private readonly List<Cliente> _clienti = new List<Cliente>();
 
-    public void CreateCliente(Cliente cliente)
-    {
-        _dbContext.Clienti.Create(cliente);
-    }
+        public void Create(Cliente cliente)
+        {
+            cliente.Id = _clienti.Count + 1;
+            _clienti.Add(cliente);
+        }
 
-    public Cliente GetClienteById(int id)
-    {
-        return _dbContext.Clienti.Read(id);
-    }
+        public void Delete(int id)
+        {
+            var cliente = _clienti.FirstOrDefault(c => c.Id == id);
+            if (cliente != null)
+            {
+                _clienti.Remove(cliente);
+            }
+        }
 
-    public List<Cliente> GetAllClienti()
-    {
-        return _dbContext.Clienti.ReadAll();
-    }
+        public Cliente Read(int id)
+        {
+            return _clienti.FirstOrDefault(c => c.Id == id);
+        }
 
-    public void UpdateCliente(Cliente cliente)
-    {
-        _dbContext.Clienti.Update(cliente);
-    }
+        public void Update(Cliente cliente)
+        {
+            var existingCliente = _clienti.FirstOrDefault(c => c.Id == cliente.Id);
+            if (existingCliente != null)
+            {
+                existingCliente.Nome = cliente.Nome;
+                existingCliente.TipoCliente = cliente.TipoCliente;
+                existingCliente.CodiceFiscale = cliente.CodiceFiscale;
+                existingCliente.PartitaIVA = cliente.PartitaIVA;
+            }
+        }
 
-    public void DeleteCliente(int id)
-    {
-        _dbContext.Clienti.Delete(id);
+        public List<Cliente> ReadAll()
+        {
+            return _clienti;
+        }
     }
 }

@@ -13,5 +13,6 @@
         public string NominativoDestinatario { get; set; }
         public decimal Costo { get; set; }
         public DateTime DataConsegnaPrevista { get; set; }
+        public StatoSpedizione Stato { get; internal set; }
     }
 }
