@@ -1,0 +1,26 @@
+﻿@model IEnumerable<EsercitazioneSettimanale1.Models.VerbaleEntity>
+
+@{
+    ViewData["Title"] = "Totale punti decurtati per trasgressore";
+}
+
+<h2>Totale punti decurtati per trasgressore</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Cognome</th>
+            <th>Nome</th>
+            <th>Punti Decurtati</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Cognome</td>
+                <td>@item.Nome</td>
+                <td>@item.PuntiDecurtati</td>
+            </tr>
+        }
+    </tbody>
+</table>

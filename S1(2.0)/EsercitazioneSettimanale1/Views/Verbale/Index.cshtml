@@ -1,0 +1,45 @@
+﻿@model EsercitazioneSettimanale1.Models.VerbaleEntity
+
+@{
+    ViewData["Title"] = "Verbale";
+}
+
+<h2>Crea Verbale</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="IdAnagrafica" class="control-label">Trasgressore</label>
+        <select asp-for="IdAnagrafica" class="form-control" asp-items="@(new SelectList(ViewBag.Trasgressori, "IdAnagrafica", "Cognome"))"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="IdViolazione" class="control-label">Violazione</label>
+        <select asp-for="IdViolazione" class="form-control" asp-items="@(new SelectList(ViewBag.Violazioni, "IdViolazione", "Descrizione"))"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="DataViolazione" class="control-label"></label>
+        <input asp-for="DataViolazione" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="IndirizzoViolazione" class="control-label"></label>
+        <input asp-for="IndirizzoViolazione" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Nominativo_Agente" class="control-label"></label>
+        <input asp-for="Nominativo_Agente" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DataTrascrizioneVerbale" class="control-label"></label>
+        <input asp-for="DataTrascrizioneVerbale" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Importo" class="control-label"></label>
+        <input asp-for="Importo" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DecurtamentoPunti" class="control-label"></label>
+        <input asp-for="DecurtamentoPunti" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Crea" class="btn btn-primary" />
+    </div>
+</form>

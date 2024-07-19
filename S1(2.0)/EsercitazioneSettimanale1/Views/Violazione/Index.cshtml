@@ -1,0 +1,24 @@
+﻿@model IEnumerable<EsercitazioneSettimanale1.Models.ViolazioneEntity>
+
+@{
+    ViewData["Title"] = "Violazione";
+}
+
+<h2>Elenco Violazioni</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Descrizione</th>
+            <th>Importo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var violazione in Model)
+        {
+            <tr>
+                <td>@violazione.Descrizione</td>
+                <td>@violazione.Importo</td>
+            </tr>
+        }
+    </tbody>
+</table>

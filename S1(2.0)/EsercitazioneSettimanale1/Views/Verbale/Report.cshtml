@@ -1,0 +1,13 @@
+﻿@model EsercitazioneSettimanale1.Models.VerbaleEntity
+
+@{
+    ViewData["Title"] = "Report";
+}
+
+<h2>Report</h2>
+<ul>
+    <li><a asp-controller="Verbale" asp-action="VerbaliPerTrasgressore">Totale verbali trascritti per trasgressore</a></li>
+    <li><a asp-controller="Verbale" asp-action="PuntiPerTrasgressore">Totale punti decurtati per trasgressore</a></li>
+    <li><a asp-controller="Verbale" asp-action="ViolazioniOltre10Punti">Violazioni con più di 10 punti decurtati</a></li>
+    <li><a asp-controller="Verbale" asp-action="ViolazioniOltre400Euro">Violazioni con importi superiori a 400 euro</a></li>
+</ul>

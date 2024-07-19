@@ -1,0 +1,32 @@
+﻿@model IEnumerable<EsercitazioneSettimanale1.Models.VerbaleEntity>
+
+@{
+    ViewData["Title"] = "Violazioni con importi superiori a 400 euro";
+}
+
+<h2>Violazioni con importi superiori a 400 euro</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Cognome</th>
+            <th>Nome</th>
+            <th>Data Violazione</th>
+            <th>Indirizzo Violazione</th>
+            <th>Importo</th>
+            <th>Punti Decurtati</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Cognome</td>
+                <td>@item.Nome</td>
+                <td>@item.DataViolazione.ToString("dd/MM/yyyy")</td>
+                <td>@item.IndirizzoViolazione</td>
+                <td>@item.Importo</td>
+                <td>@item.DecurtamentoPunti</td>
+            </tr>
+        }
+    </tbody>
+</table>
