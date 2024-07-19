@@ -7,6 +7,8 @@ namespace EsercitazioneSettimanale1.Services
     {
         IEnumerable<TrasgressoreEntity> GetAll();
         TrasgressoreEntity GetById(int id);
-        TrasgressoreEntity Save(TrasgressoreEntity trasgressore);
+        TrasgressoreEntity Create(TrasgressoreEntity trasgressore);
+        TrasgressoreEntity Update(TrasgressoreEntity trasgressore);
+        void Delete(int id);
     }
 }

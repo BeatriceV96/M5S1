@@ -4,64 +4,104 @@
     ViewData["Title"] = "Trasgressore";
 }
 
-<h2>Elenco e Creazione Trasgressori</h2>
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <h2>Elenco e Creazione/Modifica Trasgressori</h2>
+    </div>
 
-<!-- Form per Creazione Trasgressore -->
-<h3>Crea Trasgressore</h3>
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="Item2.Cognome" class="control-label"></label>
-        <input asp-for="Item2.Cognome" class="form-control" />
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">@((Model.Item2.IdAnagrafica == 0) ? "Crea Trasgressore" : "Modifica Trasgressore")</h3>
+                    <form asp-action="@(Model.Item2.IdAnagrafica == 0 ? "Create" : "EditConfirmed")" method="post">
+                        <input type="hidden" asp-for="Item2.IdAnagrafica" />
+                        <div class="form-group">
+                            <label asp-for="Item2.Cognome" class="control-label"></label>
+                            <input asp-for="Item2.Cognome" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Item2.Nome" class="control-label"></label>
+                            <input asp-for="Item2.Nome" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Item2.Indirizzo" class="control-label"></label>
+                            <input asp-for="Item2.Indirizzo" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Item2.Citta" class="control-label"></label>
+                            <input asp-for="Item2.Citta" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Item2.CAP" class="control-label"></label>
+                            <input asp-for="Item2.CAP" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Item2.CodFisc" class="control-label"></label>
+                            <input asp-for="Item2.CodFisc" class="form-control" />
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="submit" value="@(Model.Item2.IdAnagrafica == 0 ? "Crea" : "Salva Modifiche")" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Elenco Trasgressori</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Cognome</th>
+                                <th>Nome</th>
+                                <th>Indirizzo</th>
+                                <th>Città</th>
+                                <th>CAP</th>
+                                <th>Codice Fiscale</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var trasgressore in Model.Item1)
+                            {
+                                <tr>
+                                    <td>@trasgressore.Cognome</td>
+                                    <td>@trasgressore.Nome</td>
+                                    <td>@trasgressore.Indirizzo</td>
+                                    <td>@trasgressore.Citta</td>
+                                    <td>@trasgressore.CAP</td>
+                                    <td>@trasgressore.CodFisc</td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@trasgressore.IdAnagrafica" class="btn btn-warning">Modifica</a>
+                                        <a asp-action="Delete" asp-route-id="@trasgressore.IdAnagrafica" class="btn btn-danger">Cancella</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Item2.Nome" class="control-label"></label>
-        <input asp-for="Item2.Nome" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Item2.Indirizzo" class="control-label"></label>
-        <input asp-for="Item2.Indirizzo" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Item2.Citta" class="control-label"></label>
-        <input asp-for="Item2.Citta" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Item2.CAP" class="control-label"></label>
-        <input asp-for="Item2.CAP" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Item2.CodFisc" class="control-label"></label>
-        <input asp-for="Item2.CodFisc" class="form-control" />
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Crea" class="btn btn-primary" />
-    </div>
-</form>
+</div>
 
-<!-- Tabella per Visualizzazione Trasgressori -->
-<h3>Elenco Trasgressori</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Cognome</th>
-            <th>Nome</th>
-            <th>Indirizzo</th>
-            <th>Città</th>
-            <th>CAP</th>
-            <th>Codice Fiscale</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var trasgressore in Model.Item1)
-        {
-            <tr>
-                <td>@trasgressore.Cognome</td>
-                <td>@trasgressore.Nome</td>
-                <td>@trasgressore.Indirizzo</td>
-                <td>@trasgressore.Citta</td>
-                <td>@trasgressore.CAP</td>
-                <td>@trasgressore.CodFisc</td>
-            </tr>
+<style>
+    .card {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
         }
-    </tbody>
-</table>
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>

@@ -1,0 +1,33 @@
+﻿@model EsercitazioneSettimanale1.Models.TrasgressoreEntity
+
+@{
+    ViewData["Title"] = "Cancella Trasgressore";
+}
+
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <h2>Cancella Trasgressore</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger" role="alert">
+                Sei sicuro di voler cancellare questo trasgressore?
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Cognome @Model.Nome</h5>
+                    <p class="card-text">@Model.Indirizzo</p>
+                    <p class="card-text">@Model.Citta, @Model.CAP</p>
+                    <p class="card-text">@Model.CodFisc</p>
+                    <form asp-action="DeleteConfirmed" method="post">
+                        <input type="hidden" asp-for="IdAnagrafica" />
+                        <div class="form-group text-center">
+                            <input type="submit" value="Cancella" class="btn btn-danger" />
+                            <a asp-action="Index" class="btn btn-secondary">Annulla</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

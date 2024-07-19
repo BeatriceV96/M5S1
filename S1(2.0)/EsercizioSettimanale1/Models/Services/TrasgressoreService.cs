@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using EsercitazioneSettimanale1.Models;
+using EsercitazioneSettimanale1.Models.Interfaces;
 
 namespace EsercitazioneSettimanale1.Services
 {
-    public class TrasgressoreService 
+    public class TrasgressoreService
     {
         private readonly ITrasgressoreDao trasgressoreDao;
 
@@ -24,7 +25,19 @@ namespace EsercitazioneSettimanale1.Services
 
         public TrasgressoreEntity Save(TrasgressoreEntity trasgressore)
         {
-            return trasgressoreDao.Save(trasgressore);
+            if (trasgressore.IdAnagrafica == 0)
+            {
+                return trasgressoreDao.Create(trasgressore);
+            }
+            else
+            {
+                return trasgressoreDao.Update(trasgressore);
+            }
+        }
+
+        public void Delete(int id)
+        {
+            trasgressoreDao.Delete(id);
         }
     }
 }
