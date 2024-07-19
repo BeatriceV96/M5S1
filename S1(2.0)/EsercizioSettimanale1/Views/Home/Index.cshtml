@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <h2>Gestione Contravvenzioni</h2>
+    </div>
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action" asp-controller="Trasgressore" asp-action="Index">
+            <h5 class="mb-1">Anagrafare Trasgressori</h5>
+            <p class="mb-1">Registra e gestisci le informazioni sui trasgressori.</p>
+        </a>
+        <a class="list-group-item list-group-item-action" asp-controller="Violazione" asp-action="Index">
+            <h5 class="mb-1">Elenco Violazioni</h5>
+            <p class="mb-1">Visualizza l'elenco delle violazioni che è possibile contestare.</p>
+        </a>
+        <a class="list-group-item list-group-item-action" asp-controller="Verbale" asp-action="Create">
+            <h5 class="mb-1">Compilazione Verbale</h5>
+            <p class="mb-1">Crea un nuovo verbale per un trasgressore.</p>
+        </a>
+        <a class="list-group-item list-group-item-action" asp-controller="Verbale" asp-action="Report">
+            <h5 class="mb-1">Report</h5>
+            <p class="mb-1">Visualizza i report dei verbali e delle violazioni.</p>
+        </a>
+    </div>
+</div>
+
+<style>
+    .list-group-item-action {
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    .list-group-item-action:hover {
+        background-color: #f8f9fa;
+        transform: scale(1.02);
+    }
+</style>
