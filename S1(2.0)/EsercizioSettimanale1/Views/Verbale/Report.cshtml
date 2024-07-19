@@ -1,13 +1,57 @@
-﻿@model EsercitazioneSettimanale1.Models.VerbaleEntity
-
-@{
+﻿@{
     ViewData["Title"] = "Report";
 }
 
-<h2>Report</h2>
-<ul>
-    <li><a asp-controller="Verbale" asp-action="VerbaliPerTrasgressore">Totale verbali trascritti per trasgressore</a></li>
-    <li><a asp-controller="Verbale" asp-action="PuntiPerTrasgressore">Totale punti decurtati per trasgressore</a></li>
-    <li><a asp-controller="Verbale" asp-action="ViolazioniOltre10Punti">Violazioni con più di 10 punti decurtati</a></li>
-    <li><a asp-controller="Verbale" asp-action="ViolazioniOltre400Euro">Violazioni con importi superiori a 400 euro</a></li>
-</ul>
+<div class="container mt-4">
+    <div class="text-center mb-4">
+        <h2>Report</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Totale verbali trascritti per trasgressore</h5>
+                    <p class="card-text">Visualizza il totale dei verbali trascritti per ogni trasgressore.</p>
+                    <a href="@Url.Action("VerbaliPerTrasgressore", "Verbale")" class="btn btn-primary">Vai al report</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Totale punti decurtati per trasgressore</h5>
+                    <p class="card-text">Visualizza il totale dei punti decurtati per ogni trasgressore.</p>
+                    <a href="@Url.Action("PuntiPerTrasgressore", "Verbale")" class="btn btn-primary">Vai al report</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Violazioni con più di 10 punti decurtati</h5>
+                    <p class="card-text">Visualizza le violazioni che hanno più di 10 punti decurtati.</p>
+                    <a href="@Url.Action("ViolazioniOltre10Punti", "Verbale")" class="btn btn-primary">Vai al report</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Violazioni con importi superiori a 400 euro</h5>
+                    <p class="card-text">Visualizza le violazioni che hanno un importo superiore a 400 euro.</p>
+                    <a href="@Url.Action("ViolazioniOltre400Euro", "Verbale")" class="btn btn-primary">Vai al report</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+</style>
