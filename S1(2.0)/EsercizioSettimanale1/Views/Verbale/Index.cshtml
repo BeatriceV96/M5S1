@@ -1,0 +1,46 @@
+﻿@model List<EsercitazioneSettimanale1.Models.VerbaleEntity>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<a asp-action="Create">Crea</a> 
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>IdVerbale</th>
+            <th>IdAnagrafica</th>
+            <th>IdViolazione</th>
+            <th>DataViolazione</th>
+            <th>IndirizzoViolazione</th>
+            <th>Nominativo_Agente</th>
+            <th>DataTrascrizioneVerbale</th>
+            <th>Importo</th>
+            <th>DecurtamentoPunti</th>
+            <th>Cognome</th>
+            <th>Nome</th>
+            <th>Descrizione</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.IdVerbale</td>
+                <td>@item.IdAnagrafica</td>
+                <td>@item.IdViolazione</td>
+                <td>@item.DataViolazione.ToString("dd/MM/yyyy")</td>
+                <td>@item.IndirizzoViolazione</td>
+                <td>@item.Nominativo_Agente</td>
+                <td>@item.DataTrascrizioneVerbale.ToString("dd/MM/yyyy")</td>
+                <td>@item.Importo</td>
+                <td>@item.DecurtamentoPunti</td>
+                <td>@item.Cognome</td>
+                <td>@item.Nome</td>
+                <td>@item.Descrizione</td>
+            </tr>
+        }
+    </tbody>
+</table>

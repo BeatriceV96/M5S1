@@ -1,4 +1,4 @@
-﻿@model Tuple<IEnumerable<EsercitazioneSettimanale1.Models.TrasgressoreEntity>, EsercitazioneSettimanale1.Models.TrasgressoreEntity>
+﻿@model IEnumerable<EsercitazioneSettimanale1.Models.TrasgressoreViewModel>
 
 @{
     ViewData["Title"] = "Trasgressore";
@@ -8,44 +8,11 @@
     <div class="text-center mb-4">
         <h2>Elenco e Creazione/Modifica Trasgressori</h2>
     </div>
+    <a asp-action="Create">Crea</a>
 
     <div class="row">
         <div class="col-md-6 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">@((Model.Item2.IdAnagrafica == 0) ? "Crea Trasgressore" : "Modifica Trasgressore")</h3>
-                    <form asp-action="@(Model.Item2.IdAnagrafica == 0 ? "Create" : "EditConfirmed")" method="post">
-                        <input type="hidden" asp-for="Item2.IdAnagrafica" />
-                        <div class="form-group">
-                            <label asp-for="Item2.Cognome" class="control-label"></label>
-                            <input asp-for="Item2.Cognome" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Item2.Nome" class="control-label"></label>
-                            <input asp-for="Item2.Nome" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Item2.Indirizzo" class="control-label"></label>
-                            <input asp-for="Item2.Indirizzo" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Item2.Citta" class="control-label"></label>
-                            <input asp-for="Item2.Citta" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Item2.CAP" class="control-label"></label>
-                            <input asp-for="Item2.CAP" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Item2.CodFisc" class="control-label"></label>
-                            <input asp-for="Item2.CodFisc" class="form-control" />
-                        </div>
-                        <div class="form-group text-center">
-                            <input type="submit" value="@(Model.Item2.IdAnagrafica == 0 ? "Crea" : "Salva Modifiche")" class="btn btn-primary" />
-                        </div>
-                    </form>
-                </div>
-            </div>
+            
         </div>
         <div class="col-md-6 mb-4">
             <div class="card">
@@ -64,7 +31,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var trasgressore in Model.Item1)
+                            @foreach (var trasgressore in Model)
                             {
                                 <tr>
                                     <td>@trasgressore.Cognome</td>
@@ -73,10 +40,7 @@
                                     <td>@trasgressore.Citta</td>
                                     <td>@trasgressore.CAP</td>
                                     <td>@trasgressore.CodFisc</td>
-                                    <td>
-                                        <a asp-action="Edit" asp-route-id="@trasgressore.IdAnagrafica" class="btn btn-warning">Modifica</a>
-                                        <a asp-action="Delete" asp-route-id="@trasgressore.IdAnagrafica" class="btn btn-danger">Cancella</a>
-                                    </td>
+                                    
                                 </tr>
                             }
                         </tbody>

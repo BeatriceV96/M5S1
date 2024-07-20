@@ -2,184 +2,140 @@
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using EsercitazioneSettimanale1.Models.Interfaces;
+
 using EsercitazioneSettimanale1.Models;
-using EsercitazioneSettimanale1.Models.Services;
+
 
 namespace EsercitazioneSettimanale1.DAO
 {
-    public class VerbaleDao : DaoBase, IVerbaleDao
+    public class VerbaleDao : DaoBase
     {
         public VerbaleDao(IConfiguration configuration, ILogger<VerbaleDao> logger) : base(configuration, logger) { }
 
-        public void Save(VerbaleEntity verbale)
-        {
-            try
-            {
-                using var conn = new SqlConnection(connectionString);
-                conn.Open();
-                using var cmd = new SqlCommand("INSERT INTO Verbale (IdAnagrafica, IdViolazione, DataViolazione, IndirizzoViolazione, Nominativo_Agente, DataTrascrizioneVerbale, Importo, DecurtamentoPunti) VALUES (@idAnagrafica, @idViolazione, @dataViolazione, @indirizzoViolazione, @nominativoAgente, @dataTrascrizioneVerbale, @importo, @decurtamentoPunti)", conn);
-                cmd.Parameters.AddWithValue("@idAnagrafica", verbale.IdAnagrafica);
-                cmd.Parameters.AddWithValue("@idViolazione", verbale.IdViolazione);
-                cmd.Parameters.AddWithValue("@dataViolazione", verbale.DataViolazione);
-                cmd.Parameters.AddWithValue("@indirizzoViolazione", verbale.IndirizzoViolazione);
-                cmd.Parameters.AddWithValue("@nominativoAgente", verbale.Nominativo_Agente);
-                cmd.Parameters.AddWithValue("@dataTrascrizioneVerbale", verbale.DataTrascrizioneVerbale);
-                cmd.Parameters.AddWithValue("@importo", verbale.Importo);
-                cmd.Parameters.AddWithValue("@decurtamentoPunti", verbale.DecurtamentoPunti);
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "Exception in {}", nameof(Save));
-                throw;
-            }
-        }
 
-        public IEnumerable<VerbaleEntity> GetByTrasgressoreId(int idAnagrafica)
+
+        public List<VerbaleEntity> GetVerbali()
         {
-            var result = new List<VerbaleEntity>();
+            List<VerbaleEntity> result = new List<VerbaleEntity>();
             try
             {
-                using var conn = new SqlConnection(connectionString);
-                conn.Open();
-                using var cmd = new SqlCommand("SELECT * FROM Verbale WHERE IdAnagrafica = @idAnagrafica", conn);
-                cmd.Parameters.AddWithValue("@idAnagrafica", idAnagrafica);
-                using var reader = cmd.ExecuteReader();
-                while (reader.Read())
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    result.Add(new VerbaleEntity
+                    conn.Open();
+                    const string SELECT_ALL_VERBALI = @"
+                SELECT v.IdVerbale, 
+                       a.IdAnagrafica, 
+                       a.Nome, 
+                       a.Cognome, 
+                       v.IdViolazione, 
+                       t.Descrizione, 
+                       v.DataViolazione, 
+                       v.IndirizzoViolazione, 
+                       v.Nominativo_Agente, 
+                       v.DataTrascrizioneVerbale, 
+                       v.Importo, 
+                       v.DecurtamentoPunti 
+                FROM Verbale AS v 
+                INNER JOIN Anagrafica AS a ON a.IdAnagrafica = v.IdAnagrafica 
+                INNER JOIN TipoViolazione AS t ON t.IdViolazione = v.IdViolazione";
+                    using (SqlCommand cmd = new SqlCommand(SELECT_ALL_VERBALI, conn))
                     {
-                        IdVerbale = reader.GetInt32(0),
-                        IdAnagrafica = reader.GetInt32(1),
-                        IdViolazione = reader.GetInt32(2),
-                        DataViolazione = reader.GetDateTime(3),
-                        IndirizzoViolazione = reader.GetString(4),
-                        Nominativo_Agente = reader.GetString(5),
-                        DataTrascrizioneVerbale = reader.GetDateTime(6),
-                        Importo = reader.GetDecimal(7),
-                        DecurtamentoPunti = reader.GetInt32(8)
-                    });
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                VerbaleEntity verbale = new VerbaleEntity
+                                {
+                                    IdVerbale = reader.GetInt32(0),
+                                    IdAnagrafica = reader.GetInt32(1),
+                                    Nome = reader.GetString(2),
+                                    Cognome = reader.GetString(3),
+                                    IdViolazione = reader.GetInt32(4),
+                                    Descrizione = reader.GetString(5),
+                                    DataViolazione = reader.GetDateTime(6),
+                                    IndirizzoViolazione = reader.GetString(7),
+                                    Nominativo_Agente = reader.GetString(8),
+                                    DataTrascrizioneVerbale = reader.GetDateTime(9),
+                                    Importo = reader.GetDecimal(10),
+                                    DecurtamentoPunti = reader.GetInt32(11)
+                                };
+                                result.Add(verbale);
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Exception in {}", nameof(GetByTrasgressoreId));
-                throw;
+                throw new Exception("An error occurred while getting the verbali", ex);
             }
             return result;
         }
 
-        public IEnumerable<VerbaleEntity> GetVerbaliPerTrasgressore()
+        public void CreateVerbale(VerbaleEntity verbale)
         {
-            var result = new List<VerbaleEntity>();
             try
             {
-                using var conn = new SqlConnection(connectionString);
-                conn.Open();
-                using var cmd = new SqlCommand("SELECT a.Cognome, a.Nome, COUNT(v.IdVerbale) AS NumeroVerbali FROM Verbale v JOIN Anagrafica a ON v.IdAnagrafica = a.IdAnagrafica GROUP BY a.Cognome, a.Nome", conn);
-                using var reader = cmd.ExecuteReader();
-                while (reader.Read())
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    result.Add(new VerbaleEntity
+                    conn.Open();
+                    const string INSERT_VERBALE = "insert into Verbale (IdAnagrafica,IdViolazione,DataViolazione,IndirizzoViolazione,Nominativo_Agente,DataTrascrizioneVerbale,Importo,DecurtamentoPunti) values (@IdAnagrafica,@IdViolazione,@DataViolazione,@IndirizzoViolazione,@Nominativo_Agente,@DataTrascrizioneVerbale,@Importo,@DecurtamentoPunti)";
                     {
-                        Cognome = reader.GetString(0),
-                        Nome = reader.GetString(1),
-                        NumeroVerbali = reader.GetInt32(2)
-                    });
+                        using (SqlCommand cmd = new SqlCommand(INSERT_VERBALE, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@IdAnagrafica", verbale.IdAnagrafica);
+                            cmd.Parameters.AddWithValue("@IdViolazione", verbale.IdViolazione);
+                            cmd.Parameters.AddWithValue("@DataViolazione", verbale.DataViolazione);
+                            cmd.Parameters.AddWithValue("@IndirizzoViolazione", verbale.IndirizzoViolazione);
+                            cmd.Parameters.AddWithValue("@Nominativo_Agente", verbale.Nominativo_Agente);
+                            cmd.Parameters.AddWithValue("@DataTrascrizioneVerbale", verbale.DataTrascrizioneVerbale);
+                            cmd.Parameters.AddWithValue("@Importo", verbale.Importo);
+                            cmd.Parameters.AddWithValue("@DecurtamentoPunti", verbale.DecurtamentoPunti);                           
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Exception in {}", nameof(GetVerbaliPerTrasgressore));
-                throw;
+                throw new Exception("An error occurred while creating the verbale", ex);
             }
-            return result;
-        }
+        }       
 
-        public IEnumerable<VerbaleEntity> GetPuntiPerTrasgressore()
-        {
-            var result = new List<VerbaleEntity>();
+        public List<TrasgressoreEntity> GetTrasgressori()
+            {
+            List<TrasgressoreEntity> result = new List<TrasgressoreEntity>();
             try
             {
-                using var conn = new SqlConnection(connectionString);
-                conn.Open();
-                using var cmd = new SqlCommand("SELECT a.Cognome, a.Nome, SUM(v.DecurtamentoPunti) AS PuntiDecurtati FROM Verbale v JOIN Anagrafica a ON v.IdAnagrafica = a.IdAnagrafica GROUP BY a.Cognome, a.Nome", conn);
-                using var reader = cmd.ExecuteReader();
-                while (reader.Read())
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    result.Add(new VerbaleEntity
+                    conn.Open();
+                    const string SELECT_ALL_TRASGRESSORI = "SELECT * FROM Anagrafica";
+                    using (SqlCommand cmd = new SqlCommand(SELECT_ALL_TRASGRESSORI, conn))
                     {
-                        Cognome = reader.GetString(0),
-                        Nome = reader.GetString(1),
-                        PuntiDecurtati = reader.GetInt32(2)
-                    });
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                TrasgressoreEntity trasgressore = new TrasgressoreEntity
+                                {
+                                    IdAnagrafica = reader.GetInt32(0),
+                                    Cognome = reader.GetString(1),
+                                    Nome = reader.GetString(2),
+                                    Indirizzo = reader.GetString(3),
+                                    Citta = reader.GetString(4),
+                                    CAP = reader.GetString(5),
+                                    CodFisc = reader.GetString(6)
+                                };
+                                result.Add(trasgressore);
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Exception in {}", nameof(GetPuntiPerTrasgressore));
-                throw;
-            }
-            return result;
-        }
-
-        public IEnumerable<VerbaleEntity> GetViolazioniOltre10Punti()
-        {
-            var result = new List<VerbaleEntity>();
-            try
-            {
-                using var conn = new SqlConnection(connectionString);
-                conn.Open();
-                using var cmd = new SqlCommand("SELECT a.Cognome, a.Nome, v.DataViolazione, v.IndirizzoViolazione, v.Importo, v.DecurtamentoPunti FROM Verbale v JOIN Anagrafica a ON v.IdAnagrafica = a.IdAnagrafica WHERE v.DecurtamentoPunti > 10", conn);
-                using var reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    result.Add(new VerbaleEntity
-                    {
-                        Cognome = reader.GetString(0),
-                        Nome = reader.GetString(1),
-                        DataViolazione = reader.GetDateTime(2),
-                        IndirizzoViolazione = reader.GetString(3),
-                        Importo = reader.GetDecimal(4),
-                        DecurtamentoPunti = reader.GetInt32(5)
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "Exception in {}", nameof(GetViolazioniOltre10Punti));
-                throw;
-            }
-            return result;
-        }
-
-        public IEnumerable<VerbaleEntity> GetViolazioniOltre400Euro()
-        {
-            var result = new List<VerbaleEntity>();
-            try
-            {
-                using var conn = new SqlConnection(connectionString);
-                conn.Open();
-                using var cmd = new SqlCommand("SELECT a.Cognome, a.Nome, v.DataViolazione, v.IndirizzoViolazione, v.Importo, v.DecurtamentoPunti FROM Verbale v JOIN Anagrafica a ON v.IdAnagrafica = a.IdAnagrafica WHERE v.Importo > 400", conn);
-                using var reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    result.Add(new VerbaleEntity
-                    {
-                        Cognome = reader.GetString(0),
-                        Nome = reader.GetString(1),
-                        DataViolazione = reader.GetDateTime(2),
-                        IndirizzoViolazione = reader.GetString(3),
-                        Importo = reader.GetDecimal(4),
-                        DecurtamentoPunti = reader.GetInt32(5)
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex, "Exception in {}", nameof(GetViolazioniOltre400Euro));
-                throw;
+                throw new Exception("An error occurred while getting the trasgressori", ex);
             }
             return result;
         }

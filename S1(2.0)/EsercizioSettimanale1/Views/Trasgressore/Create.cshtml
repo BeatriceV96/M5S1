@@ -1,0 +1,23 @@
+﻿@model EsercitazioneSettimanale1.Models.TrasgressoreViewModel
+
+<form asp-action="Create">
+    <label asp-for="Cognome"></label>
+    <input asp-for="Cognome" />
+    <br/>
+    <label asp-for="Nome"></label>
+    <input asp-for="Nome"/>
+    <br/>
+    <label asp-for="Indirizzo"></label>
+    <input asp-for="Indirizzo"/>
+    <br/>
+    <label asp-for="Citta"></label>
+    <input asp-for="Citta"/>
+    <br/>
+    <label asp-for="CAP"></label>
+    <input asp-for="CAP"/>
+    <br/>
+    <label asp-for="CodFisc"></label>
+    <input asp-for="CodFisc"/>
+    <br/>
+    <input type="submit" value="Crea" class="btn btn-primary" />
+</form>

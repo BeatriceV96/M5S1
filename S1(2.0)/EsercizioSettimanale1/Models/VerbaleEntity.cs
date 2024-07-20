@@ -13,7 +13,9 @@
         public int DecurtamentoPunti { get; set; }
         public string Cognome { get; set; }
         public string Nome { get; set; }
-        public int NumeroVerbali { get; internal set; }
-        public int PuntiDecurtati { get; internal set; }
+        public string Descrizione { get;  set; }
+        public int TotaleVerbali { get; set; }
+
+
     }
 }

@@ -1,16 +1,17 @@
-﻿@model IEnumerable<EsercitazioneSettimanale1.Models.VerbaleEntity>
+﻿@model List<EsercitazioneSettimanale1.Models.VerbaleEntity>
 
 @{
-    ViewData["Title"] = "Totale punti decurtati per trasgressore";
+    ViewData["Title"] = "Totale punti decurtati";
 }
 
-<h2>Totale punti decurtati per trasgressore</h2>
+<h2>Verbali con totale punti decurtati </h2>
+
 <table class="table">
     <thead>
         <tr>
-            <th>Cognome</th>
             <th>Nome</th>
-            <th>Punti Decurtati</th>
+            <th>Cognome</th>
+            <th>Totale Punti </th>
         </tr>
     </thead>
     <tbody>
@@ -19,7 +20,7 @@
             <tr>
                 <td>@item.Cognome</td>
                 <td>@item.Nome</td>
-                <td>@item.PuntiDecurtati</td>
+                <td>@item.DecurtamentoPunti</td>
             </tr>
         }
     </tbody>

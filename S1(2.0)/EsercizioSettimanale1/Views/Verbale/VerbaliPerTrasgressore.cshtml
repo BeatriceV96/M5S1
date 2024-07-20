@@ -1,25 +1,26 @@
-﻿@model IEnumerable<EsercitazioneSettimanale1.Models.VerbaleEntity>
+﻿@model List<EsercitazioneSettimanale1.Models.VerbaleEntity>
 
 @{
-    ViewData["Title"] = "Totale verbali trascritti per trasgressore";
+    ViewData["Title"] = "Verbali per Trasgressore";
 }
 
-<h2>Totale verbali trascritti per trasgressore</h2>
+<h2>Verbali per Trasgressore</h2>
+
 <table class="table">
     <thead>
         <tr>
-            <th>Cognome</th>
             <th>Nome</th>
-            <th>Numero di Verbali</th>
+            <th>Cognome</th>
+            <th>Totale Verbali</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr>             
                 <td>@item.Cognome</td>
                 <td>@item.Nome</td>
-                <td>@item.NumeroVerbali</td>
+                <td>@item.TotaleVerbali</td>
             </tr>
         }
     </tbody>

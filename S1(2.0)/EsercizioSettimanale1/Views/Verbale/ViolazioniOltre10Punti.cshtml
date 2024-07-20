@@ -1,19 +1,19 @@
-﻿@model IEnumerable<EsercitazioneSettimanale1.Models.VerbaleEntity>
+﻿@model List<EsercitazioneSettimanale1.Models.VerbaleEntity>
 
 @{
-    ViewData["Title"] = "Violazioni con più di 10 punti decurtati";
+    ViewData["Title"] = "Violazioni superiori a 10 punti";
 }
 
-<h2>Violazioni con più di 10 punti decurtati</h2>
+<h2>Verbali per Trasgressore</h2>
+
 <table class="table">
     <thead>
         <tr>
-            <th>Cognome</th>
             <th>Nome</th>
+            <th>Cognome</th>
             <th>Data Violazione</th>
-            <th>Indirizzo Violazione</th>
             <th>Importo</th>
-            <th>Punti Decurtati</th>
+            <th>Decurtamento punti</th>
         </tr>
     </thead>
     <tbody>
@@ -23,9 +23,10 @@
                 <td>@item.Cognome</td>
                 <td>@item.Nome</td>
                 <td>@item.DataViolazione.ToString("dd/MM/yyyy")</td>
-                <td>@item.IndirizzoViolazione</td>
                 <td>@item.Importo</td>
                 <td>@item.DecurtamentoPunti</td>
+                
+
             </tr>
         }
     </tbody>

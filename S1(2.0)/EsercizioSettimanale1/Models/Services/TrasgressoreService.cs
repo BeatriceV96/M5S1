@@ -1,43 +1,31 @@
 ﻿using System.Collections.Generic;
 using EsercitazioneSettimanale1.Models;
-using EsercitazioneSettimanale1.Models.Interfaces;
+using EsercitazioneSettimanale1.DAO;
+
 
 namespace EsercitazioneSettimanale1.Services
 {
     public class TrasgressoreService
     {
-        private readonly ITrasgressoreDao trasgressoreDao;
+        private readonly TrasgressoreDao trasgressoreDao;
 
-        public TrasgressoreService(ITrasgressoreDao trasgressoreDao)
+        public TrasgressoreService(TrasgressoreDao trasgressoreDao)
         {
             this.trasgressoreDao = trasgressoreDao;
         }
 
-        public IEnumerable<TrasgressoreEntity> GetAll()
+        public IEnumerable<TrasgressoreViewModel> GetAll()
         {
             return trasgressoreDao.GetAll();
         }
 
-        public TrasgressoreEntity GetById(int id)
+       
+
+        public void Create(TrasgressoreViewModel trasgressore)
         {
-            return trasgressoreDao.GetById(id);
+            trasgressoreDao.Create(trasgressore);
         }
 
-        public TrasgressoreEntity Save(TrasgressoreEntity trasgressore)
-        {
-            if (trasgressore.IdAnagrafica == 0)
-            {
-                return trasgressoreDao.Create(trasgressore);
-            }
-            else
-            {
-                return trasgressoreDao.Update(trasgressore);
-            }
-        }
-
-        public void Delete(int id)
-        {
-            trasgressoreDao.Delete(id);
-        }
+        
     }
 }

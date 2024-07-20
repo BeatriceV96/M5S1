@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using EsercitazioneSettimanale1.Models;
 using EsercitazioneSettimanale1.Services;
-using EsercitazioneSettimanale1.Models.Services;
+
 
 namespace EsercitazioneSettimanale1.DAO
 {
-    public class ViolazioneDao : DaoBase, IViolazioneDao
+    public class ViolazioneDao : DaoBase
     {
         private const string SELECT_ALL_VIOLAZIONI = "SELECT IdViolazione, Descrizione, Importo FROM TipoViolazione";
 

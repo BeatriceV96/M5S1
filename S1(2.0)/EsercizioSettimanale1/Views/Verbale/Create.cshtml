@@ -1,45 +1,90 @@
 ﻿@model EsercitazioneSettimanale1.Models.VerbaleEntity
 
 @{
-    ViewData["Title"] = "Compilazione Verbale";
+    Layout = null;
 }
 
-<h2>Crea Verbale</h2>
+<!DOCTYPE html>
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="IdAnagrafica" class="control-label">Trasgressore</label>
-        <select asp-for="IdAnagrafica" class="form-control" asp-items="@(new SelectList(ViewBag.Trasgressori, "IdAnagrafica", "Cognome"))"></select>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<h4>VerbaleEntity</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="IdAnagrafica" class="control-label"></label>
+                    <select asp-for="IdAnagrafica" class="form-select">
+                        <option>Seleziona trasgressore</option>
+                        @foreach (var trasgressore in ViewBag.Trasgressori)
+                        {
+                            <option value="@trasgressore.IdAnagrafica">@trasgressore.Cognome @trasgressore.Nome</option>
+                        }
+                    </select>
+                    <span asp-validation-for="IdAnagrafica" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdViolazione" class="control-label"></label>
+                    <select asp-for="IdViolazione" class="form-select">
+                        <option>Seleziona violazione</option>
+                        @foreach (var violazione in ViewBag.Violazioni)
+                        {
+                            <option value="@violazione.IdViolazione">@violazione.Descrizione</option>
+                        }
+                    </select>
+                    <span asp-validation-for="IdViolazione" class="text-danger"></span>
+                </div>
+
+            <div class="form-group">
+                <label asp-for="DataViolazione" class="control-label"></label>
+                <input asp-for="DataViolazione" class="form-control" />
+                <span asp-validation-for="DataViolazione" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IndirizzoViolazione" class="control-label"></label>
+                <input asp-for="IndirizzoViolazione" class="form-control" />
+                <span asp-validation-for="IndirizzoViolazione" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nominativo_Agente" class="control-label"></label>
+                <input asp-for="Nominativo_Agente" class="form-control" />
+                <span asp-validation-for="Nominativo_Agente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataTrascrizioneVerbale" class="control-label"></label>
+                <input asp-for="DataTrascrizioneVerbale" class="form-control" />
+                <span asp-validation-for="DataTrascrizioneVerbale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Importo" class="control-label"></label>
+                <input asp-for="Importo" class="form-control" />
+                <span asp-validation-for="Importo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DecurtamentoPunti" class="control-label"></label>
+                <input asp-for="DecurtamentoPunti" class="form-control" />
+                <span asp-validation-for="DecurtamentoPunti" class="text-danger"></span>
+            </div>         
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <div class="form-group">
-        <label asp-for="IdViolazione" class="control-label">Violazione</label>
-        <select asp-for="IdViolazione" class="form-control" asp-items="@(new SelectList(ViewBag.Violazioni, "IdViolazione", "Descrizione"))"></select>
-    </div>
-    <div class="form-group">
-        <label asp-for="DataViolazione" class="control-label"></label>
-        <input asp-for="DataViolazione" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="IndirizzoViolazione" class="control-label"></label>
-        <input asp-for="IndirizzoViolazione" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Nominativo_Agente" class="control-label"></label>
-        <input asp-for="Nominativo_Agente" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="DataTrascrizioneVerbale" class="control-label"></label>
-        <input asp-for="DataTrascrizioneVerbale" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Importo" class="control-label"></label>
-        <input asp-for="Importo" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="DecurtamentoPunti" class="control-label"></label>
-        <input asp-for="DecurtamentoPunti" class="form-control" />
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Crea" class="btn btn-primary" />
-    </div>
-</form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>

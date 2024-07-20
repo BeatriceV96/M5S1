@@ -19,12 +19,13 @@ namespace EsercitazioneSettimanale1.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<VerbaleEntity> verbali = verbaleService.GetVerbali();
+            return View(verbali);
         }
 
         public IActionResult Create()
         {
-            ViewBag.Trasgressori = trasgressoreService.GetAll();
+            ViewBag.Trasgressori = verbaleService.GetTrasgressori();
             ViewBag.Violazioni = violazioneService.GetAll();
             return View();
         }
@@ -32,43 +33,33 @@ namespace EsercitazioneSettimanale1.Controllers
         [HttpPost]
         public IActionResult Create(VerbaleEntity verbale)
         {
-            if (ModelState.IsValid)
-            {
-                verbaleService.Save(verbale);
-                return RedirectToAction(nameof(Index));
-            }
-            ViewBag.Trasgressori = trasgressoreService.GetAll();
-            ViewBag.Violazioni = violazioneService.GetAll();
-            return View(verbale);
+            verbaleService.CreateVerbale(verbale);
+            return RedirectToAction("Index");
         }
 
         public IActionResult VerbaliPerTrasgressore()
         {
-            var verbali = verbaleService.GetVerbaliPerTrasgressore();
+            List<VerbaleEntity> verbali = verbaleService.GetVerbaliPerTrasgressore();
             return View(verbali);
-        }
-
-        public IActionResult PuntiPerTrasgressore()
-        {
-            var punti = verbaleService.GetPuntiPerTrasgressore();
-            return View(punti);
         }
 
         public IActionResult ViolazioniOltre10Punti()
         {
-            var violazioni = verbaleService.GetViolazioniOltre10Punti();
-            return View(violazioni);
+            List<VerbaleEntity> verbali = verbaleService.GetViolazioniOltre10Punti();
+            return View(verbali);
         }
 
         public IActionResult ViolazioniOltre400Euro()
         {
-            var violazioni = verbaleService.GetViolazioniOltre400Euro();
-            return View(violazioni);
+            List<VerbaleEntity> verbali = verbaleService.GetVerbaliOltre400Euro();
+            return View(verbali);
         }
-
-        public IActionResult Report()
+        
+        public IActionResult TotalePunti()
         {
-            return View();
+            List<VerbaleEntity> verbali = verbaleService.GetTotalePunti();
+            return View(verbali);
         }
+       
     }
 }

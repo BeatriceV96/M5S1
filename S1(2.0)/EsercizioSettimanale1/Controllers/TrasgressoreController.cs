@@ -18,64 +18,24 @@ namespace EsercitazioneSettimanale1.Controllers
         {
             
                 var trasgressori = trasgressoreService.GetAll();
-                var newTrasgressore = new TrasgressoreEntity();
-                var viewModel = Tuple.Create(trasgressori, newTrasgressore);
-                return View(viewModel);
+                
+                return View(trasgressori);
          
         }
-        [HttpPost]
-        public IActionResult Create(TrasgressoreEntity trasgressore)
+        
+        public IActionResult Create()
         {
-            if (ModelState.IsValid)
-            {
-                trasgressoreService.Save(trasgressore);
-                return RedirectToAction(nameof(Index));
-            }
-            var trasgressori = trasgressoreService.GetAll();
-            var viewModel = Tuple.Create(trasgressori, trasgressore);
-            return View("Index", viewModel);
-        }
-
-        public IActionResult Edit(int id)
-        {
-            var trasgressore = trasgressoreService.GetById(id);
-            if (trasgressore == null)
-            {
-                return NotFound();
-            }
-            var trasgressori = trasgressoreService.GetAll();
-            var viewModel = Tuple.Create(trasgressori, trasgressore);
-            return View("Index", viewModel);
+            
+            return View();
         }
 
         [HttpPost]
-        public IActionResult EditConfirmed(TrasgressoreEntity trasgressore)
+        public IActionResult Create(TrasgressoreViewModel trasgressore)
         {
-            if (ModelState.IsValid)
-            {
-                trasgressoreService.Save(trasgressore);
-                return RedirectToAction(nameof(Index));
-            }
-            var trasgressori = trasgressoreService.GetAll();
-            var viewModel = Tuple.Create(trasgressori, trasgressore);
-            return View("Index", viewModel);
+            trasgressoreService.Create(trasgressore);
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int id)
-        {
-            var trasgressore = trasgressoreService.GetById(id);
-            if (trasgressore == null)
-            {
-                return NotFound();
-            }
-            return View(trasgressore);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteConfirmed(int id)
-        {
-            trasgressoreService.Delete(id);
-            return RedirectToAction(nameof(Index));
-        }
+      
     }
 }
