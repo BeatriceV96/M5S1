@@ -10,81 +10,100 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
 <body>
 
-<h4>VerbaleEntity</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="IdAnagrafica" class="control-label"></label>
-                    <select asp-for="IdAnagrafica" class="form-select">
-                        <option>Seleziona trasgressore</option>
-                        @foreach (var trasgressore in ViewBag.Trasgressori)
-                        {
-                            <option value="@trasgressore.IdAnagrafica">@trasgressore.Cognome @trasgressore.Nome</option>
-                        }
-                    </select>
-                    <span asp-validation-for="IdAnagrafica" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="IdViolazione" class="control-label"></label>
-                    <select asp-for="IdViolazione" class="form-select">
-                        <option>Seleziona violazione</option>
-                        @foreach (var violazione in ViewBag.Violazioni)
-                        {
-                            <option value="@violazione.IdViolazione">@violazione.Descrizione</option>
-                        }
-                    </select>
-                    <span asp-validation-for="IdViolazione" class="text-danger"></span>
-                </div>
+    <div class="container mt-5">
+        <h4 class="text-center">Crea Verbale</h4>
+        <hr />
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="DataViolazione" class="control-label"></label>
-                <input asp-for="DataViolazione" class="form-control" />
-                <span asp-validation-for="DataViolazione" class="text-danger"></span>
+                            <div class="form-group">
+                                <label asp-for="IdAnagrafica" class="control-label"></label>
+                                <select asp-for="IdAnagrafica" class="form-control">
+                                    <option>Seleziona trasgressore</option>
+                                    @foreach (var trasgressore in ViewBag.Trasgressori)
+                                    {
+                                        <option value="@trasgressore.IdAnagrafica">@trasgressore.Cognome @trasgressore.Nome</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="IdAnagrafica" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="IdViolazione" class="control-label"></label>
+                                <select asp-for="IdViolazione" class="form-control">
+                                    <option>Seleziona violazione</option>
+                                    @foreach (var violazione in ViewBag.Violazioni)
+                                    {
+                                        <option value="@violazione.IdViolazione">@violazione.Descrizione</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="IdViolazione" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="DataViolazione" class="control-label"></label>
+                                <input asp-for="DataViolazione" class="form-control" />
+                                <span asp-validation-for="DataViolazione" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="IndirizzoViolazione" class="control-label"></label>
+                                <input asp-for="IndirizzoViolazione" class="form-control" />
+                                <span asp-validation-for="IndirizzoViolazione" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Nominativo_Agente" class="control-label"></label>
+                                <input asp-for="Nominativo_Agente" class="form-control" />
+                                <span asp-validation-for="Nominativo_Agente" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="DataTrascrizioneVerbale" class="control-label"></label>
+                                <input asp-for="DataTrascrizioneVerbale" class="form-control" />
+                                <span asp-validation-for="DataTrascrizioneVerbale" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Importo" class="control-label"></label>
+                                <input asp-for="Importo" class="form-control" />
+                                <span asp-validation-for="Importo" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="DecurtamentoPunti" class="control-label"></label>
+                                <input asp-for="DecurtamentoPunti" class="form-control" />
+                                <span asp-validation-for="DecurtamentoPunti" class="text-danger"></span>
+                            </div>
+
+                            <div class="text-center">
+                                <input type="submit" value="Crea" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <a class="btn btn-secondary" asp-action="Index">Torna alla lista</a>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="IndirizzoViolazione" class="control-label"></label>
-                <input asp-for="IndirizzoViolazione" class="form-control" />
-                <span asp-validation-for="IndirizzoViolazione" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nominativo_Agente" class="control-label"></label>
-                <input asp-for="Nominativo_Agente" class="form-control" />
-                <span asp-validation-for="Nominativo_Agente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataTrascrizioneVerbale" class="control-label"></label>
-                <input asp-for="DataTrascrizioneVerbale" class="form-control" />
-                <span asp-validation-for="DataTrascrizioneVerbale" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Importo" class="control-label"></label>
-                <input asp-for="Importo" class="form-control" />
-                <span asp-validation-for="Importo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DecurtamentoPunti" class="control-label"></label>
-                <input asp-for="DecurtamentoPunti" class="form-control" />
-                <span asp-validation-for="DecurtamentoPunti" class="text-danger"></span>
-            </div>         
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

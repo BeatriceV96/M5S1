@@ -8,18 +8,20 @@
     <div class="text-center mb-4">
         <h2>Elenco e Creazione/Modifica Trasgressori</h2>
     </div>
-    <a asp-action="Create">Crea</a>
+    <div class="mb-3 text-right">
+        <a class="btn btn-primary" asp-action="Create">Crea</a>
+    </div>
 
     <div class="row">
         <div class="col-md-6 mb-4">
-            
+            <!-- Sezione vuota per eventuali utilizzi futuri -->
         </div>
-        <div class="col-md-6 mb-4">
-            <div class="card">
+        <div class="col-md-12 mb-4">
+            <div class="card shadow-sm">
                 <div class="card-body">
-                    <h3>Elenco Trasgressori</h3>
-                    <table class="table">
-                        <thead>
+                    <h3 class="card-title">Elenco Trasgressori</h3>
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
                             <tr>
                                 <th>Cognome</th>
                                 <th>Nome</th>
@@ -40,7 +42,6 @@
                                     <td>@trasgressore.Citta</td>
                                     <td>@trasgressore.CAP</td>
                                     <td>@trasgressore.CodFisc</td>
-                                    
                                 </tr>
                             }
                         </tbody>
@@ -58,7 +59,7 @@
 
         .card:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
 
     .form-group label {
@@ -67,5 +68,9 @@
 
     .text-center {
         text-align: center;
+    }
+
+    .btn {
+        margin-right: 5px;
     }
 </style>

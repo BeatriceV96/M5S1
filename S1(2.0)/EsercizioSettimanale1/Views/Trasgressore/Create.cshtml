@@ -1,23 +1,61 @@
 ﻿@model EsercitazioneSettimanale1.Models.TrasgressoreViewModel
 
-<form asp-action="Create">
-    <label asp-for="Cognome"></label>
-    <input asp-for="Cognome" />
-    <br/>
-    <label asp-for="Nome"></label>
-    <input asp-for="Nome"/>
-    <br/>
-    <label asp-for="Indirizzo"></label>
-    <input asp-for="Indirizzo"/>
-    <br/>
-    <label asp-for="Citta"></label>
-    <input asp-for="Citta"/>
-    <br/>
-    <label asp-for="CAP"></label>
-    <input asp-for="CAP"/>
-    <br/>
-    <label asp-for="CodFisc"></label>
-    <input asp-for="CodFisc"/>
-    <br/>
-    <input type="submit" value="Crea" class="btn btn-primary" />
-</form>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Crea Trasgressore</h3>
+                    <form asp-action="Create">
+                        <div class="form-group">
+                            <label asp-for="Cognome" class="form-label"></label>
+                            <input asp-for="Cognome" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Nome" class="form-label"></label>
+                            <input asp-for="Nome" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Indirizzo" class="form-label"></label>
+                            <input asp-for="Indirizzo" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Citta" class="form-label"></label>
+                            <input asp-for="Citta" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CAP" class="form-label"></label>
+                            <input asp-for="CAP" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CodFisc" class="form-label"></label>
+                            <input asp-for="CodFisc" class="form-control" />
+                        </div>
+                        <div class="text-center">
+                            <input type="submit" value="Crea" class="btn btn-primary mt-3" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
